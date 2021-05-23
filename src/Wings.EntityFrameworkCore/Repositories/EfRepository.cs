@@ -15,12 +15,11 @@ namespace Wings.EntityFrameworkCore.Repositories
         where TEntity : class, IEntity
     {
         private DbSet<TEntity> _entities;
-        private readonly IDbContextProvider<TDbContext> _dbContextProvider;
-        public EfRepository(IDbContextProvider<TDbContext> dbContextProvider)
+        public EfRepository(TDbContext dbContext)
         {
-            _dbContextProvider = dbContextProvider;
+            DbContext = dbContext;
         }
-        public IDbContext DbContext => _dbContextProvider.DbContext;
+        public IDbContext DbContext { get; private set; }
         public DbSet<TEntity> Entities
         {
             get
@@ -99,7 +98,7 @@ namespace Wings.EntityFrameworkCore.Repositories
         where TDbContext : IDbContext
         where TEntity : class, IEntity<TKey>
     {
-        public EfRepository(IDbContextProvider<TDbContext> dbContextProvider) : base(dbContextProvider)
+        public EfRepository(TDbContext dbContext) : base(dbContext)
         {
         }
         public async Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
