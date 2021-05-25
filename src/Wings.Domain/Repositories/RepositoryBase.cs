@@ -1,14 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Wings.Domain.Entities;
+using Wings.Domain.Uow;
 
 namespace Wings.Domain.Repositories
 {
     public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
     {
+        public abstract IUnitOfWork UnitOfWork { get; }
+
+        public abstract IQueryable<TEntity> Table { get; }
+
+        public abstract IQueryable<TEntity> TableNoTracking { get; }
+
         protected abstract Task SaveChangesAsync(CancellationToken cancellationToken);
         public abstract Task<long> GetCountAsync(CancellationToken cancellationToken = default);
         public abstract Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);

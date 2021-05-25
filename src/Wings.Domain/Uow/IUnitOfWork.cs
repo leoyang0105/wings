@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Wings.EntityFrameworkCore
+namespace Wings.Domain.Uow
 {
     public interface IUnitOfWork : IDisposable
     {

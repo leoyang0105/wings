@@ -7,54 +7,59 @@ using System.Threading;
 using System.Threading.Tasks;
 using Wings.Domain.Entities;
 using Wings.Domain.Repositories;
+using Wings.Domain.Uow;
 
 namespace Wings.EntityFrameworkCore.Repositories
 {
-    public class EfRepository<TDbContext, TEntity> : RepositoryBase<TEntity>, IEfRepository<TEntity>
+    public class EfRepository<TDbContext, TEntity> : RepositoryBase<TEntity>, IRepository<TEntity>
         where TDbContext : IDbContext
         where TEntity : class, IEntity
     {
+        private readonly TDbContext _dbContext;
         private DbSet<TEntity> _entities;
         public EfRepository(TDbContext dbContext)
         {
-            DbContext = dbContext;
+            _dbContext = dbContext;
         }
-        public IDbContext DbContext { get; private set; }
+        public override IUnitOfWork UnitOfWork => _dbContext;
+        public override IQueryable<TEntity> Table => Entities;
+        public override IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
         public DbSet<TEntity> Entities
         {
             get
             {
                 if (_entities == null)
-                    _entities = this.DbContext.Set<TEntity>();
+                    _entities = _dbContext.Set<TEntity>();
                 return _entities;
             }
         }
 
+
         public override async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
         {
-            return await this.Entities.LongCountAsync(cancellationToken);
+            return await Entities.LongCountAsync(cancellationToken);
         }
 
         public override async Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default)
         {
-            return await this.Entities.ToListAsync(cancellationToken);
+            return await Entities.ToListAsync(cancellationToken);
         }
 
         public override async Task<TEntity> InsertAsync([NotNull] TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            this.Entities.Add(entity);
+            Entities.Add(entity);
             if (autoSave)
             {
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await SaveChangesAsync(cancellationToken);
             }
             return entity;
         }
         public override async Task InsertRangeAsync([NotNull] IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            this.Entities.RemoveRange(entities);
+            Entities.RemoveRange(entities);
             if (autoSave)
             {
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await SaveChangesAsync(cancellationToken);
             }
         }
 
@@ -62,39 +67,39 @@ namespace Wings.EntityFrameworkCore.Repositories
         {
             var updatedEntity = Entities.Update(entity).Entity;
             if (autoSave)
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await SaveChangesAsync(cancellationToken);
             return updatedEntity;
         }
         public override async Task UpdateRangeAsync([NotNull] IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            this.Entities.UpdateRange(entities);
+            Entities.UpdateRange(entities);
             if (autoSave)
             {
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await SaveChangesAsync(cancellationToken);
             }
         }
         public override async Task DeleteAsync([NotNull] TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            this.Entities.Remove(entity);
+            Entities.Remove(entity);
             if (autoSave)
             {
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await SaveChangesAsync(cancellationToken);
             }
         }
         public override async Task DeleteRangeAsync([NotNull] IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            this.Entities.RemoveRange(entities);
+            Entities.RemoveRange(entities);
             if (autoSave)
             {
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await SaveChangesAsync(cancellationToken);
             }
         }
         protected override async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
-            await this.DbContext.SaveChangesAsync(cancellationToken);
+            await UnitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
-    public class EfRepository<TDbContext, TEntity, TKey> : EfRepository<TDbContext, TEntity>, IEfRepository<TEntity, TKey>
+    public class EfRepository<TDbContext, TEntity, TKey> : EfRepository<TDbContext, TEntity>, IRepository<TEntity, TKey>
         where TDbContext : IDbContext
         where TEntity : class, IEntity<TKey>
     {

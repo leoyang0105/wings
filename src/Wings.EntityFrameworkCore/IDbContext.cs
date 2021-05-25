@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Wings.Domain.Uow;
 
 namespace Wings.EntityFrameworkCore
 {
