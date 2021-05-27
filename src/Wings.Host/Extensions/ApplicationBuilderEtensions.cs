@@ -12,6 +12,11 @@ namespace Wings.Host.Extensions
             app.UseAuthorization();
             return app;
         }
+        public static IApplicationBuilder UseWingstAllowAnyCorsPolicy(this IApplicationBuilder app)
+        {
+            app.UseCors(HostDefaults.AllowAnyCorsPolicy);
+            return app;
+        }
         public static IApplicationBuilder UseWingsSwagger(this IApplicationBuilder app, string apiName, string apiVersion, string pathBase)
         {
             app.UseSwagger();
@@ -38,7 +43,7 @@ namespace Wings.Host.Extensions
                 }
             }
             app.UseRouting();
-            app.UseCors(HostDefaults.AllowAnyCorsPolicy);
+            app.UseWingstAllowAnyCorsPolicy();
             app.UseWingstAuth();
             app.UseEndpoints(endpoints =>
             {
