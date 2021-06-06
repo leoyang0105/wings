@@ -30,34 +30,12 @@ namespace Wings.Domain.Entities
             _domainEvents?.Clear();
         }
     }
-    public abstract class AggregateRoot<TKey> : Entity<TKey>, IAggregateRoot<TKey>, IHasConcurrencyStamp
+    public abstract class AggregateRoot<TKey> : AggregateRoot, IAggregateRoot<TKey>
     {
-        private List<INotification> _domainEvents;
-        public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
-        public virtual string ConcurrencyStamp { get; set; }
-
+        public TKey Id { get; set; }
         protected AggregateRoot()
         {
             ConcurrencyStamp = Guid.NewGuid().ToString("N");
-        }
-        protected AggregateRoot(TKey id) : base(id)
-        {
-            ConcurrencyStamp = Guid.NewGuid().ToString("N");
-        }
-        public void AddDomainEvent(INotification eventItem)
-        {
-            _domainEvents = _domainEvents ?? new List<INotification>();
-            _domainEvents.Add(eventItem);
-        }
-
-        public void RemoveDomainEvent(INotification eventItem)
-        {
-            _domainEvents?.Remove(eventItem);
-        }
-
-        public void ClearDomainEvents()
-        {
-            _domainEvents?.Clear();
         }
     }
 }
