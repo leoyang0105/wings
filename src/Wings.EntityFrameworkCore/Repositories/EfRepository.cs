@@ -98,6 +98,11 @@ namespace Wings.EntityFrameworkCore.Repositories
         {
             await UnitOfWork.SaveChangesAsync(cancellationToken);
         }
+
+        public override async Task<TEntity> FindByIdAsync(object id)
+        {
+            return await Entities.FindAsync(id);
+        }
     }
     public class EfRepository<TDbContext, TEntity, TKey> : EfRepository<TDbContext, TEntity>, IRepository<TEntity, TKey>
         where TDbContext : IDbContext

@@ -11,6 +11,7 @@ namespace Wings.Domain.Repositories
     public interface IBaseRepository<TEntity> : IReadOnlyBaseRepository<TEntity>
         where TEntity : class, IEntity
     {
+        Task<TEntity> FindByIdAsync(object id);
         IUnitOfWork UnitOfWork { get; }
         IQueryable<TEntity> Table { get; }
         Task<TEntity> InsertAsync([NotNull] TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);

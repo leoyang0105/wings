@@ -16,7 +16,7 @@ namespace Wings.Domain.Repositories
         public abstract IQueryable<TEntity> Table { get; }
 
         public abstract IQueryable<TEntity> TableNoTracking { get; }
-
+        public abstract Task<TEntity> FindByIdAsync(object id);
         protected abstract Task SaveChangesAsync(CancellationToken cancellationToken);
         public abstract Task<long> GetCountAsync(CancellationToken cancellationToken = default);
         public abstract Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);
@@ -57,6 +57,6 @@ namespace Wings.Domain.Repositories
             {
                 await this.SaveChangesAsync(cancellationToken);
             }
-        }
+        } 
     }
 }
