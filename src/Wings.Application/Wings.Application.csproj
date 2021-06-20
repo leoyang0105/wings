@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>Wings.Application</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Leo Yang</Authors>
     <Company>Molysoft</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

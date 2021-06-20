@@ -10,7 +10,14 @@ namespace Wings.Application.Models
         public int TotalCount { get; private set; }
         public int TotalPages { get; private set; }
         public IEnumerable<T> Items { get; private set; }
-
+        public PagedResult(IEnumerable<T> items, IPagedResult paged)
+        {
+            Items = items;
+            PageIndex = paged.PageIndex;
+            PageSize = paged.PageSize;
+            TotalCount = paged.TotalCount;
+            TotalPages = paged.TotalPages;
+        }
         public PagedResult(IQueryable<T> source, int pageIndex, int pageSize)
         {
             if (pageIndex > 0)
