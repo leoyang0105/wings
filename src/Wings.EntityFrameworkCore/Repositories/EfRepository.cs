@@ -56,7 +56,7 @@ namespace Wings.EntityFrameworkCore.Repositories
         }
         public override async Task InsertRangeAsync([NotNull] IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default)
         {
-            Entities.RemoveRange(entities);
+            Entities.AddRange(entities);
             if (autoSave)
             {
                 await SaveChangesAsync(cancellationToken);
