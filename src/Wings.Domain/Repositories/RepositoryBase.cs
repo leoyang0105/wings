@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
@@ -59,6 +58,5 @@ namespace Wings.Domain.Repositories
                 await this.SaveChangesAsync(cancellationToken);
             }
         }
-        public abstract EntityEntry<TEntity> Entry(TEntity entity);
     }
 }

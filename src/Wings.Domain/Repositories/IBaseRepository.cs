@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
@@ -12,7 +11,6 @@ namespace Wings.Domain.Repositories
     public interface IBaseRepository<TEntity> : IReadOnlyBaseRepository<TEntity>
         where TEntity : class, IEntity
     {
-        EntityEntry<TEntity> Entry(TEntity entity);
         Task<TEntity> FindByIdAsync(object id);
         IUnitOfWork UnitOfWork { get; }
         IQueryable<TEntity> Table { get; }

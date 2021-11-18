@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -103,11 +102,6 @@ namespace Wings.EntityFrameworkCore.Repositories
         public override async Task<TEntity> FindByIdAsync(object id)
         {
             return await Entities.FindAsync(id);
-        }
-
-        public override EntityEntry<TEntity> Entry(TEntity entity)
-        {
-            return _dbContext.Entry(entity);
         }
     }
     public class EfRepository<TDbContext, TEntity, TKey> : EfRepository<TDbContext, TEntity>, IRepository<TEntity, TKey>
