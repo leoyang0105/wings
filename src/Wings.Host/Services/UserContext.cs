@@ -9,7 +9,6 @@ namespace Wings.Host.Services
         private string _userId;
         private string _userName;
         private string _email;
-        private string _phoneNumber;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public UserContext(IHttpContextAccessor httpContextAccessor)
         {
@@ -64,17 +63,6 @@ namespace Wings.Host.Services
                 }
                 return _email;
             }
-        }
-        public string PhoneNumber
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_phoneNumber))
-                {
-                    _phoneNumber = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.MobilePhone)?.Value;
-                }
-                return _phoneNumber;
-            }
-        }
+        } 
     }
 }

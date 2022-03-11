@@ -55,8 +55,10 @@ namespace Wings.Host.Extensions
 
             return services;
         }
-        public static IServiceCollection AddWingsSwagger(this IServiceCollection services, string apiName, string apiVersion)
+        public static IServiceCollection AddWingsSwagger(this IServiceCollection services, string apiName, string apiVersion = "v1")
         {
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            services.AddEndpointsApiExplorer();
             return services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(apiVersion, new OpenApiInfo { Title = apiName, Version = apiVersion });
@@ -73,18 +75,6 @@ namespace Wings.Host.Extensions
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
-        }
-        public static IServiceCollection AddWingsAPI(this IServiceCollection services, IConfiguration configuration)
-        {
-            var apiName = configuration["ApiName"];
-
-            services.AddWingsControllers();
-            return services
-                 .AddWingsAllowAnyCorsPolicy()
-                 .AddWingsSwagger(apiName, configuration["ApiVersion"])
-                 .AddWingsAuth(apiName, configuration["IdentityUrl"])
-                 .AddWingsHttpUserContext()
-                 .AddWingsHealthChecks();
         }
     }
 }

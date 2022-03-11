@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageId>Wings.EventBus</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Leo Yang</Authors>
     <Company>Molysoft</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/molysoft/wings-framework.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/leoyang0105/wings.git</RepositoryUrl>
     <PackageTags></PackageTags>
     <Description></Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.2" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
   </ItemGroup>
 
 </Project>

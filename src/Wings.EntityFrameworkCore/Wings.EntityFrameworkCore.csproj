@@ -8,14 +8,14 @@
 		<Company>Molysoft</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/molysoft/wings-framework.git</RepositoryUrl>
+		<RepositoryUrl>https://github.com/leoyang0105/wings.git</RepositoryUrl>
 		<PackageTags></PackageTags>
 		<Description></Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MediatR" Version="9.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="MediatR" Version="10.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>

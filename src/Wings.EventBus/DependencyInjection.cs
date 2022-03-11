@@ -11,15 +11,13 @@ namespace Wings.EventBus
             services.AddMassTransit(cfg =>
             {
                 cfg.AddConsumers(assemblies);
-                cfg.UsingInMemory((ctx, c) =>
+                cfg.UsingInMemory((ctx, cfg) =>
                 {
-                    c.TransportConcurrencyLimit = 100;
-                    c.ReceiveEndpoint(x =>
-                    {
-                        x.ConfigureConsumers(ctx);
-                    });
+                    cfg.TransportConcurrencyLimit = 100;
+                    cfg.ConfigureEndpoints(ctx);
                 });
             });
+            services.AddMassTransitHostedService(true);
             return services;
         }
     }

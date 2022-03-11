@@ -4,7 +4,6 @@
     {
         string EmailAddress { get; }
         string IpAddress { get; }
-        string PhoneNumber { get; }
         string UserId { get; }
         string UserName { get; }
     }

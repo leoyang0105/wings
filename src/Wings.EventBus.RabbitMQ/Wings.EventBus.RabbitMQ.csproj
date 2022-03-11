@@ -1,9 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<PackageId>Wings.Domain</PackageId>
-		<Version>1.1.1</Version>
+		<PackageId>Wings.EventBus.RabbitMQ</PackageId>
+		<Version>1.0.0</Version>
 		<Authors>Leo Yang</Authors>
 		<Company>Molysoft</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -12,5 +11,13 @@
 		<PackageTags></PackageTags>
 		<Description></Description>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Wings.EventBus\Wings.EventBus.csproj" />
+	</ItemGroup>
 
 </Project>
