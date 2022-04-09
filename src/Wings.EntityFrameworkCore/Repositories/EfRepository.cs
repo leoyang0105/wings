@@ -13,7 +13,7 @@ namespace Wings.EntityFrameworkCore.Repositories
 {
     public class EfRepository<TDbContext, TEntity> : RepositoryBase<TEntity>, IRepository<TEntity>
         where TDbContext : IDbContext
-        where TEntity : class, IEntity
+        where TEntity : class
     {
         private readonly TDbContext _dbContext;
         private DbSet<TEntity> _entities;

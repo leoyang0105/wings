@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>Wings.EntityFrameworkCore</PackageId>
-		<Version>1.1.2</Version>
+		<Version>1.1.3</Version>
 		<Authors>Leo Yang</Authors>
 		<Company>Molysoft</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
