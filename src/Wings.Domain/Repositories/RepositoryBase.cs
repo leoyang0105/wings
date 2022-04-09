@@ -3,18 +3,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Wings.Domain.Entities;
 using Wings.Domain.Uow;
 
 namespace Wings.Domain.Repositories
 {
     public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class
     {
         public abstract IUnitOfWork UnitOfWork { get; }
-
         public abstract IQueryable<TEntity> Table { get; }
-
         public abstract IQueryable<TEntity> TableNoTracking { get; }
         public abstract Task<TEntity> FindByIdAsync(object id);
         protected abstract Task SaveChangesAsync(CancellationToken cancellationToken);

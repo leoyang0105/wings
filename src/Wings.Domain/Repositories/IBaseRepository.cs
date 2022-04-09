@@ -9,7 +9,7 @@ using Wings.Domain.Uow;
 namespace Wings.Domain.Repositories
 {
     public interface IBaseRepository<TEntity> : IReadOnlyBaseRepository<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class
     {
         Task<TEntity> FindByIdAsync(object id);
         IUnitOfWork UnitOfWork { get; }
@@ -22,7 +22,7 @@ namespace Wings.Domain.Repositories
         Task DeleteRangeAsync([NotNull] IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
     }
     public interface IBaseRepository<TEntity, TKey> : IBaseRepository<TEntity>, IReadOnlyBaseRepository<TEntity, TKey>
-    where TEntity : class, IEntity<TKey>
+    where TEntity : class
     {
         Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default);
         Task DeleteRangeAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default);
