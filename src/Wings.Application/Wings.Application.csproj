@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<PackageId>Wings.Application</PackageId>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 		<Authors>Leo Yang</Authors>
 		<Company>Molysoft</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -12,5 +12,9 @@
 		<PackageTags></PackageTags>
 		<Description></Description>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="11.0.1" />
+	</ItemGroup>
 
 </Project>
